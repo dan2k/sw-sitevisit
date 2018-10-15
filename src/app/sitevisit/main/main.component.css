@@ -1,0 +1,152 @@
+
+body {
+  font-family: 'Covered By Your Grace', cursive;
+  line-height: 1.25;
+
+}
+.fbmobile{
+  display:none;
+}
+.mobile-full-width{
+  margin:8px;
+}
+.mobile{
+  display:inline-block;
+}
+
+.example-loading-shade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 56px;
+  right: 0;
+  background: rgba(0, 0, 0, 0.15);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.example-rate-limit-reached {
+  color: #980000;
+  max-width: 360px;
+  text-align: center;
+}
+/* Column Widths */
+.mat-column-no{
+  max-width: 7%;
+}
+.mat-column-sw_no{
+  max-width: 7%;
+}
+.mat-column-visit_date{
+  max-width: 7%;
+}
+.mat-column-status{
+  max-width: 7%;
+}
+.mat-column-upd_date {
+  max-width: 7%;
+}
+.mat-column-action{
+  max-width: 7%
+}
+
+.mat-column-sys{
+  max-width: 18%;
+}
+.mat-column-detail{
+  max-width: 20%;
+}
+.mat-column-suggestion {
+  max-width: 20%;
+}
+@media screen and (max-width: 600px) {
+  .fbmobile{
+    display:inline-block;
+
+  }
+  .mobile{
+    display:none;
+  }
+  .mobile-full-width{
+    width:95%;
+    margin:8px;
+  }
+  .mat-table {
+    border: 0;
+    vertical-align: middle
+  }
+  .mat-table caption {
+    font-size: 1em;
+  }
+  .mat-table .mat-header-row {
+    display: none;
+  }
+  /*  Enable this to hide header
+  .mat-table .mat-header-cell {
+
+    border: 10px solid;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  */
+  .mat-table .mat-row {
+    border-bottom: 5px solid #ddd;
+    display: block;
+  }
+
+  /*
+  .mat-table .mat-row:nth-child(even) {background: #CCC}
+  .mat-table .mat-row:nth-child(odd) {background: #FFF}
+  */
+  .mat-table .mat-cell {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: 1em;
+    text-align: left;
+    font-weight: nomal;
+    height:30px;
+    margin-bottom: 4%;
+    margin-left: 2%;
+    margin-right: 2%;
+  }
+  .mat-table .mat-cell:before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label) "\00a0\00a0";
+    float: left;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1em;
+  }
+  .mat-table .mat-cell:last-child {
+    border-bottom: 0;
+    text-align:center;
+    margin-bottom:0;
+  }
+    .mat-table .mat-cell:first-child {
+    /* margin-top: 4%; */
+    display:none;
+  }
+    .mat-table .mat-cell:nth-child(2) {
+    margin-top: 4%;
+  }
+  .mat-column-no,
+  .mat-column-sw_no,
+  .mat-column-visit_date,
+  .mat-column-status,
+  .mat-column-upd_date ,
+  .mat-column-action,
+  .mat-column-sys,
+  .mat-column-detail,
+  .mat-column-suggestion {
+    max-width: 100%;
+  }
+}

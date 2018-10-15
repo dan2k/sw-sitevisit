@@ -1,0 +1,22 @@
+.sw-form {
+  min-width: 150px;
+  max-width: 100%;
+  width: 100%;
+}
+
+.sw-full-width {
+  width:40%;
+  margin:8px;
+}
+.sw-full-width2 {
+  width:100%;
+  margin:8px;
+}
+.sw-textarea-width {
+  width: 100%;
+  margin:8px;
+}
+.button-row button {
+  margin: 8px;
+}
+

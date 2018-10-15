@@ -1,0 +1,30 @@
+RewriteEngine On
+
+# Some hosts may require you to use the `RewriteBase` directive.
+# If you need to use the `RewriteBase` directive, it should be the
+# absolute physical path to the directory that contains this htaccess file.
+#
+#RewriteBase /webrg6/iccServer/
+
+# Cross domain access
+Header add Access-Control-Allow-Origin "*, localhost:8100"
+Header add Access-Control-Allow-Headers "origin, x-requested-with, content-type, x-access-token"
+Header add Access-Control-Allow-Methods "PUT, GET, POST, DELETE, OPTIONS"
+
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.html [QSA,L]
+
+Header unset Content-Security-Policy
+#Header always append X-Frame-Options SAMEORIGIN
+#Header always append X-Frame-Options http://www.controldata.co.th
+
+#<IfModule mod_rewrite.c>
+#RewriteEngine On
+#RewriteCond %{REQUEST_FILENAME} -f [OR]
+#RewriteCond %{REQUEST_FILENAME} -d
+#RewriteRule ^ - [L]
+
+# Rewrite everything else to index.html to allow HTML5 state links
+#RewriteRule ^ index.html [L]
+#</IfModule>

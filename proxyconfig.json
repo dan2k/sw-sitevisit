@@ -1,0 +1,10 @@
+{
+  "/sw-sitevisit":{
+    "target":"http://www.controldata.co.th/mpsicc/iccServer/sw-sitevisit",
+    "secure": true,
+    "pathRewrite": {
+      "^/sw-sitevisit": ""
+    },
+      "changeOrigin": true
+    }
+}

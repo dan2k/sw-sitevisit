@@ -1,0 +1,82 @@
+<div class="container-fuild">
+  <div style="position:fixed;width:100%" class="alert alert-success"><i class="material-icons">add_box</i>&nbsp;บันทึกผลการตรวจเยี่ยมสำนักทะเบียน</div>
+  <br><br>
+  <form class="sw-form"  (ngSubmit)="onSubmit(file)" #f="ngForm">
+    <mat-form-field class="sw-full-width">
+      <mat-select placeholder="จังหวัด" name="province" #province="ngModel" [(ngModel)]="frm.province_id" (selectionChange)="getCustptype()"
+        required>
+        <mat-option>เลือก</mat-option>
+        <mat-option *ngFor="let province of provinces" [value]="province.province_id">{{province.province_name}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="province.invalid&&(province.dirty||province.touched)">ยังไม่ได้เลือกจังหวัด</mat-error>
+      <!-- <mat-hint>เลือกจังหวัด</mat-hint> -->
+    </mat-form-field>
+    <br>
+    <mat-form-field class="sw-full-width">
+      <mat-select placeholder="ประเภทหน่วยงาน" name="cust_ptype" #cust_ptype [(ngModel)]="frm.cust_ptype"
+        (selectionChange)="getCustpcode()" required>
+        <mat-option>เลือก</mat-option>
+        <mat-option *ngFor="let custptype of custptypes" [value]="custptype.cust_ptype">{{custptype.cust_desc}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="!cust_ptype.valid||!cust_ptype.touched">ยังไม่ได้เลือกประเภทหน่วยงาน</mat-error>
+    </mat-form-field>
+    <mat-form-field class="sw-full-width">
+      <mat-select placeholder="หน่วยงาน" name="cust_pcode" #cust_pcode [(ngModel)]="frm.cust_pcode" (selectionChange)="getUser()" required>
+        <mat-option>เลือก</mat-option>
+        <mat-option *ngFor="let custpcode of custpcodes" [value]="custpcode.cust_pcode">{{custpcode.cust_pdesc}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="!cust_pcode.valid||!cust_pcode.touched">ยังไม่ได้เลือกหน่วยงาน</mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field class="sw-full-width">
+      <mat-select  placeholder="เจ้าหน้าที่" name="sw_user_id" #sw_user_id [(ngModel)]="frm.sw_user_id" required>
+        <mat-option>เลือก</mat-option>
+        <mat-option *ngFor="let user of users" [value]="user.user_id">{{user.thiname}}</mat-option>
+
+      </mat-select>
+      <mat-error *ngIf="!sw_user_id.valid||!sw_user_id.touched">ยังไม่ได้เลือกเจ้าหน้าที่</mat-error>
+    </mat-form-field>
+    <mat-form-field class="sw-full-width">
+      <input matInput [matDatepicker]="myDatepicker"  [formControl]="date"   #sw_add_date name="sw_add_date" placeholder="วันที่ตรวจเยี่ยม"   required disabled readonly>
+      <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+      <mat-datepicker touchUi #myDatepicker  disabled="false"></mat-datepicker>
+      <mat-error *ngIf="!sw_add_date.valid||!sw_add_date.touched">ยังไม่ได้เลือกวันที่</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="sw-full-width2">
+      <mat-select  placeholder="ระบบงาน" #prob_gid name="prob_gid" [(ngModel)]="frm.prob_gid" (selectionChange)="getProblemsub()" required>
+        <mat-option>เลือก</mat-option>
+        <mat-option *ngFor="let group of problemgroups" [value]="group.prob_gid">{{group.prob_gdesc}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="!prob_gid.valid||!prob_gid.touched">ยังไม่ได้เลือกระบบงาน</mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field class="sw-full-width2">
+      <mat-select  placeholder="โปรแกรม" #problem_sub_id name="problem_sub_id" [(ngModel)]="frm.problem_sub_id" required>
+        <mat-option>เลือก</mat-option>
+        <mat-option *ngFor="let p of problemsubs" [value]="p.problem_sub_id">{{p.problem_sub_desc}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="!problem_sub_id.valid||!problem_sub_id.touched">ยังไม่ได้เลือกโปรแกรม</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="sw-textarea-width">
+      <textarea matInput placeholder="ปัญหาที่พบ" name="sw_detail" #sw_detail [(ngModel)]="frm.sw_detail" required></textarea>
+      <mat-error *ngIf="!sw_detail.valid||!sw_detail.touched">ยังไม่ได้ระบุปัญหา</mat-error>
+    </mat-form-field>
+    <mat-form-field class="sw-textarea-width">
+      <textarea matInput  placeholder="ข้อเสนอแนะปรับปรุงแก้ไข" name="sw_suggestion" #sw_suggestion [(ngModel)]="frm.sw_suggestion" required></textarea>
+      <mat-error *ngIf="!sw_suggestion.valid||!sw_suggestion.touched">ยังไม่ได้ระบุข้อเสนอแนะ</mat-error>
+    </mat-form-field>
+    <div class="button-row">
+      <button type="button" mat-button color="warn" (click)="file.click()">
+        <mat-icon>file_upload</mat-icon>
+        upload
+      </button><span><b>file:&nbsp;</b>{{filedoc}}</span>
+      <input  type="file"  #file style="display:none;" accept="image/*,application/pdf" (change)="setFile(file)">
+    </div>
+    <div class="button-row">
+      <button type="submit" [disabled]="!f.valid" mat-raised-button color="primary">บันทึก</button>
+      <button type="button" mat-raised-button color="accent" (click)="reset(f)">ยกเลิก</button>
+    </div>
+  </form>
+</div>
