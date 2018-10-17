@@ -15,6 +15,7 @@ import {merge, Observable, of as observableOf} from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { FormControl } from "@angular/forms";
+import { Router,ActivatedRoute } from '@angular/router';
 export interface model {
   sw_no: string;
   sw_user_id: string;
@@ -26,6 +27,7 @@ export interface model {
   sw_detail: string;
   sw_suggestion: string;
   sw_status: string;
+  status_desc: string;
   sw_upd_datetime: string;
   visit_date: string;
   place: string;
@@ -69,14 +71,19 @@ export class MainComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   // ###################################################
-  startDate: any = new FormControl(new Date());
-  endDate: any = new FormControl(new Date());
+  startDate: any = new FormControl({ value: '',disabled:true });
+  endDate: any = new FormControl({ value: '', disabled: true });
+  user: any = {};
+  status: any = new FormControl({ value: '', disabled: false });
   constructor(
     private service: SitevisiteService,
     private http: HttpClient,
+    private router: Router,
+    private rout:ActivatedRoute,
     breakpointObserver: BreakpointObserver
 
   ) {
+
     breakpointObserver.observe(['(max-width: 600px)']).subscribe(result => {
     //   this.displayedColumns = result.matches ?
     //   ['sw_no', 'visit_date','sys','detail','suggestion','status','upd_date','action'] :
@@ -94,20 +101,62 @@ export class MainComponent implements OnInit, AfterViewInit {
       this.dataSource.data = data.data;
     });
   } */
-  show(row: any) {
-    console.log(row);
+  show(sw_no: any) {
+    let start = this.startDate.value==''?'':this.service.formatDate(new Date(this.startDate.value));
+    let end = this.endDate.value==''?'':this.service.formatDate(new Date(this.endDate.value));
+    let status = this.status.value;
+    let pageIndex = this.paginator.pageIndex;
+    let pageSize = this.paginator.pageSize;
+    this.router.navigate(['update', sw_no,start,end,status,pageIndex,pageSize]);
   }
   ngOnInit() {
+    this.paginator._intl.itemsPerPageLabel = "จำนวนรายการ ต่อหน้า";
+    // this.paginator._intl.getRangeLabel = (page, size, length) => `Page ${page} of ${length / size}`;
   }
   ngAfterViewInit() {
+    this.rout.params.subscribe((param) => {
+      if (param.start||param.start=='') {//from back
+        console.log('param==>',param);
+        let start =param['start'];
+        let end = param['end'];
+        let pageIndex = param['pageIndex'];
+        let pageSize = param['pageSize'];
+        let status = param['status'];
+        this.startDate = start ==''?new FormControl({ value:'',disabled:true }):new FormControl({ value:new Date(`${start} 00:00:00`),disabled:true });
+        this.endDate = end ==''?new FormControl({ value:'',disabled:true }):new FormControl({ value: new Date(`${end} 00:00:00`),disabled:true });
+        this.paginator.pageIndex = pageIndex;
+        this.paginator.pageSize = pageSize;
+        this.status.value = status;
+        console.log('from back===>', param);
+      }
+      this.loadData();
+    });
+
+  }
+  clear() {
+    this.startDate = new FormControl({ value: '', disabled: true });
+    this.endDate = new FormControl({ value: '', disabled: true });
+    this.status = new FormControl({ value: '', disabled: false });
+    this.loadData();
+  }
+  loadData() {
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
     merge(this.sort.sortChange, this.paginator.page)
       .pipe(
         startWith({}),
         switchMap(() => {
           this.isLoadingResults = true;
-          return this.service.getData('','','',
-            this.sort.active, this.sort.direction, this.paginator.pageIndex,this.paginator.pageSize);
+
+          let start: any;
+          let end: any;
+          let pageIndex: any;
+
+          start = this.startDate.value==''?'':this.service.formatDate(new Date(this.startDate.value));
+          end = this.endDate.value==''?'':this.service.formatDate(new Date(this.endDate.value));
+          pageIndex = this.paginator.pageIndex;
+
+          console.log('start===>' + start + '--end===>' + end);
+          return this.service.getData(start,end,this.status.value,this.sort.active, this.sort.direction,pageIndex,this.paginator.pageSize);
         }),
         map((data:any) => {
           // Flip flag to show that loading has finished.
@@ -124,6 +173,9 @@ export class MainComponent implements OnInit, AfterViewInit {
           return observableOf([]);
         })
       ).subscribe(data => this.dataSource = data);
-
+  }
+  search() {
+    this.paginator.pageIndex = 0;
+    this.loadData();
   }
 }

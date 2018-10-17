@@ -37,7 +37,7 @@
       <mat-error *ngIf="!sw_user_id.valid||!sw_user_id.touched">ยังไม่ได้เลือกเจ้าหน้าที่</mat-error>
     </mat-form-field>
     <mat-form-field class="sw-full-width">
-      <input matInput [matDatepicker]="myDatepicker"  [formControl]="date"   #sw_add_date name="sw_add_date" placeholder="วันที่ตรวจเยี่ยม"   required disabled readonly>
+      <input matInput [matDatepicker]="myDatepicker"  [formControl]="date"   #sw_add_date name="sw_add_date" placeholder="วันที่ตรวจเยี่ยม"   required>
       <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
       <mat-datepicker touchUi #myDatepicker  disabled="false"></mat-datepicker>
       <mat-error *ngIf="!sw_add_date.valid||!sw_add_date.touched">ยังไม่ได้เลือกวันที่</mat-error>

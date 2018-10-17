@@ -63,7 +63,7 @@ export class AddComponent implements OnInit {
   users: UserModel[];
   frm: model = {};
   // seldate: any = new FormControl(new Date("2018-10-20 00:00:00"));
-  seldate: any = new FormControl(new Date());
+  seldate: any = new FormControl({ value: new Date(), disabled: true });
   date: any = this.seldate;
   filedoc: any='';
   constructor(
@@ -209,7 +209,7 @@ export class AddComponent implements OnInit {
     let toastref = this.toast.info("กำลังประมวลผลข้อมูล", null, {
       disableTimeOut: true
     });
-    this.frm.sw_add_date = this.formatDate(new Date(this.date.value));
+    this.frm.sw_add_date = this.service.formatDate(new Date(this.date.value));
     let patternImg = /image\/*/;
     let patternPdf = /application\/pdf/;
 
@@ -249,13 +249,13 @@ export class AddComponent implements OnInit {
     Object.keys(object).forEach(key => formData.append(key, object[key]));
     return formData;
   }
-  formatDate(date) {
-    var d = new Date(date),
-      month = "" + (d.getMonth() + 1),
-      day = "" + d.getDate(),
-      year = d.getFullYear();
-    if (month.length < 2) month = "0" + month;
-    if (day.length < 2) day = "0" + day;
-    return [year, month, day].join("-");
-  }
+  // formatDate(date) {
+  //   var d = new Date(date),
+  //     month = "" + (d.getMonth() + 1),
+  //     day = "" + d.getDate(),
+  //     year = d.getFullYear();
+  //   if (month.length < 2) month = "0" + month;
+  //   if (day.length < 2) day = "0" + day;
+  //   return [year, month, day].join("-");
+  // }
 }

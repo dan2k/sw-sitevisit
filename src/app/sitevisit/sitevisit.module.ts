@@ -45,6 +45,7 @@ import { MainComponent } from './main/main.component';
 } from '@angular/material'; */
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { UpdateComponent } from './update/update.component';
 
 
 @NgModule({
@@ -92,6 +93,6 @@ import { HttpClientModule } from '@angular/common/http';
   // MatTooltipModule,
   // MatTreeModule, */
   ],
-  declarations: [AddComponent, MainComponent]
+  declarations: [AddComponent, MainComponent, UpdateComponent]
 })
 export class SitevisitModule { }

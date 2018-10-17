@@ -14,6 +14,7 @@ import {
   MatSelectModule,
   MatSortModule,
   MatTableModule,
+  MatCardModule,
 } from '@angular/material';
 
 @NgModule({
@@ -32,6 +33,7 @@ import {
     MatSelectModule,
     MatSortModule,
     MatTableModule,
+    MatCardModule,
   ],
   exports: [
     CommonModule,
@@ -48,6 +50,7 @@ import {
     MatSelectModule,
     MatSortModule,
     MatTableModule,
+    MatCardModule,
   ],
   declarations: []
 })

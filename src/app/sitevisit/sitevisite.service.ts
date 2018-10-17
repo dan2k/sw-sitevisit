@@ -55,9 +55,36 @@ export class SitevisiteService {
 
     return this.http.post(`${url}/sitevisit.php`, formData);
   }
+  upload(formData: any) {
+    return this.http.post(`${url}/sitevisit.php`, formData);
+  }
+  del(sw_no: any, level: any, filedoc) {
+    let params = new HttpParams()
+      .set('action', 'del')
+      .set('sw_no', sw_no)
+      .set('level', level)
+      .set('filedoc', filedoc);
+    return this.http.get(`${url}/sitevisit.php`, { params: params });
+  }
+  update(sw_no: any,level: any, detail: any,remark:any) {
+    let params = new HttpParams()
+      .set('action', 'update')
+      .set('sw_no',sw_no)
+      .set('detail', detail)
+      .set('remark',remark)
+      .set('level', level);
+    return this.http.get(`${url}/sitevisit.php`, { params: params });
+  }
+  approve(sw_no:any,level:any) {
+    let params = new HttpParams()
+      .set('action', 'approve')
+      .set('sw_no',sw_no)
+      .set('level', level);
+    return this.http.get(`${url}/sitevisit.php`, { params: params });
+  }
   getData(start='',end='',status='',sort='',order='',page?:any,pageSize?:any) {
     let params = new HttpParams()
-      .set('action', 'getData2')
+      .set('action', 'getData')
       .set('start', start)
       .set('end', end)
       .set('status', status)
@@ -66,5 +93,21 @@ export class SitevisiteService {
       .set('page', page)
       .set('pageSize',pageSize);
     return this.http.get(`${url}/sitevisit.php`, { params: params });
+  }
+  getSwdetail(sw_no: any) {
+    let params = new HttpParams()
+      .set('action', 'getSwdetail')
+      .set('sw_no', sw_no);
+    return this.http.get(`${url}/sitevisit.php`, { params: params });
+  }
+
+  formatDate(date) {
+    var d = new Date(date),
+      month = "" + (d.getMonth() + 1),
+      day = "" + d.getDate(),
+      year = d.getFullYear();
+    if (month.length < 2) month = "0" + month;
+    if (day.length < 2) day = "0" + day;
+    return [year, month, day].join("-");
   }
 }

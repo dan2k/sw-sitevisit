@@ -61,6 +61,7 @@ body {
 .mat-column-suggestion {
   max-width: 20%;
 }
+
 @media screen and (max-width: 600px) {
   .fbmobile{
     display:inline-block;

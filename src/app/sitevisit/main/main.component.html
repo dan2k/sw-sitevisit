@@ -8,25 +8,30 @@
     </div>
   <button mat-mini-fab color="primary" class="fbmobile" (click)="ismobile=!ismobile">+</button>
   <mat-form-field class="mobile-full-width mobile" [style.display]="(ismobile || isDesktop) ? 'inline-block' : 'none'">
-    <input matInput [matDatepicker]="start" placeholder="วันที่เริ่มต้น" [formControl]="startDate" readonly disabled>
+    <input matInput [matDatepicker]="start" placeholder="วันที่เริ่มต้น" [formControl]="startDate" >
     <mat-datepicker-toggle matSuffix [for]="start"></mat-datepicker-toggle>
     <mat-datepicker touchUi #start disabled="false"></mat-datepicker>
   </mat-form-field>
   <mat-form-field class="mobile-full-width mobile" [style.display]="(ismobile|| isDesktop) ? 'inline-block' : 'none'">
-    <input matInput [matDatepicker]="end" placeholder="วันที่สิ้นสุด" [formControl]="endDate" readonly disabled>
+    <input matInput [matDatepicker]="end" placeholder="วันที่สิ้นสุด" [formControl]="endDate" >
     <mat-datepicker-toggle matSuffix [for]="end"></mat-datepicker-toggle>
     <mat-datepicker touchUi #end disabled="false"></mat-datepicker>
   </mat-form-field>
   <mat-form-field class="mobile-full-width mobile" [style.display]="(ismobile|| isDesktop) ? 'inline-block' : 'none'">
-    <mat-select>
-      <mat-option>None</mat-option>
-      <mat-option value="option1">Option 1</mat-option>
-      <mat-option value="option2">Option 2</mat-option>
-      <mat-option value="option3">Option 3</mat-option>
+    <mat-select placeholder="สถานะ" [formControl]="status">
+      <mat-option value=''>ทั้งหมด</mat-option>
+      <mat-option value="0">รอเสนออนุมัติ</mat-option>
+      <mat-option value="1">sw ภาคเสนออนุมัติ</mat-option>
+      <mat-option value="2">วิชาการภาคเสนออนุมัติ</mat-option>
+      <mat-option value="3">MTS เสนออนุมัติ</mat-option>
+      <mat-option value="4">วิชาการกลางเสนออนุมัติ</mat-option>
     </mat-select>
   </mat-form-field>
-  <button mat-flat-button color="primary" class="mobile" [style.display]="(ismobile|| isDesktop) ? 'inline-block' : 'none'">
+  <button mat-flat-button color="primary" class="mobile" [style.display]="(ismobile|| isDesktop) ? 'inline-block' : 'none'" (click)="search()">
       <mat-icon>search</mat-icon>
+  </button>
+  <button mat-flat-button color="accent" class="mobile" [style.display]="(ismobile|| isDesktop) ? 'inline-block' : 'none'" (click)="clear()">
+      <mat-icon>clear_all</mat-icon>
   </button>
   <mat-paginator [length]="resultsLength" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
   <!-- <mat-table [dataSource]="dataSource" [class.isMobile]="isMobile" > -->
@@ -62,7 +67,7 @@
     </ng-container>
     <ng-container matColumnDef="status">
       <mat-header-cell *matHeaderCellDef> สถานะ: </mat-header-cell>
-      <mat-cell *matCellDef="let item" data-label="สถานะ: ">{{item.sw_status}} </mat-cell>
+      <mat-cell *matCellDef="let item" data-label="สถานะ: ">{{item.status_desc}} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="upd_date">
       <mat-header-cell *matHeaderCellDef>วันเวลาปรับปรุง </mat-header-cell>
@@ -71,7 +76,7 @@
 
     <ng-container matColumnDef="action">
       <mat-header-cell *matHeaderCellDef> :: </mat-header-cell>
-      <mat-cell *matCellDef="let row"> <button class="btn btn-default btn-sm" (click)="show(row)">show</button>
+      <mat-cell *matCellDef="let row"> <button class="btn btn-default btn-sm" (click)="show(row.sw_no)">รายละเอียด</button>
       </mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
