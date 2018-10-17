@@ -36,17 +36,17 @@
       </mat-form-field>
       <mat-form-field style="width:95%">
         <textarea matInput placeholder="ข้อเสนอแนะ" #sw_suggestion="ngModel" name="sw_suggestion" [(ngModel)]="detail.sw_suggestion"
-          [disabled]="detail.sw_status!=0 || !(user.upd_permit==1 && user.level.indexOf('1')>-1) || isupdate" required></textarea>
+          [disabled]="detail.sw_status!=0 || !(user.user_id==detail.sw_emp && user.upd_permit==1 && user.level.indexOf('1')>-1) || isupdate" required></textarea>
         <mat-error *ngIf="sw_suggestion.invalid&&(sw_suggestion.dirty||sw_suggestion.touched)">กรุณาระบุข้อเสนอแนะ</mat-error>
         <span style="font-size:10px;" [hidden]="detail.sw_filedoc===null||detail.sw_filedoc===''"><a (click)="open(detail.sw_filedoc)"
-            mat-button color="accent">เอกสารแนบ</a><a mat-button color="warn" [disabled]="detail.sw_status!=0 || !(user.upd_permit==1 && user.level.indexOf('1')>-1) || isupdate"
+            mat-button color="accent">เอกสารแนบ</a><a mat-button color="warn" [disabled]="detail.sw_status!=0 || !(user.user_id==detail.sw_emp && user.upd_permit==1 && user.level.indexOf('1')>-1) || isupdate"
             (click)="del(detail.sw_filedoc)">ลบ</a></span>
       </mat-form-field>
       <mat-form-field style="width:95%">
         <textarea matInput placeholder="ข้อเสนอแนะวิชาการภาค" #sw_rg_remark name="sw_rg_remark" [(ngModel)]="detail.sw_rg_remark"
-          [disabled]="detail.sw_status!=1 || !(user.upd_permit==1 && user.level.indexOf('2')>-1) || isupdate"></textarea>
+          [disabled]="detail.sw_status!=1 || !(user.user_id==detail.sw_emp && user.upd_permit==1 && user.level.indexOf('2')>-1) || isupdate"></textarea>
         <span style="font-size:10px;" [hidden]="detail.sw_rg_filedoc===null||detail.sw_rg_filedoc===''"><a (click)="open(detail.sw_rg_filedoc)"
-            mat-button color="accent">เอกสารแนบ</a><a mat-button color="warn" [disabled]="detail.sw_status!=1 || !(user.upd_permit==1 && user.level.indexOf('2')>-1) || isupdate"
+            mat-button color="accent">เอกสารแนบ</a><a mat-button color="warn" [disabled]="detail.sw_status!=1 || !(user.user_id==detail.sw_emp && user.upd_permit==1 && user.level.indexOf('2')>-1) || isupdate"
             (click)="del(detail.sw_rg_filedoc)">ลบ</a></span>
       </mat-form-field>
       <mat-form-field style="width:95%">
@@ -90,7 +90,7 @@
     <input type="file" #file style="display:none;" accept="image/*,application/pdf" (change)="upload(file)">
   </mat-card-actions>
   <mat-card-footer>
-    <button mat-flat-button color="primary" [disabled]="f.invalid || detail.sw_status!=0 || isupdate" *ngIf="(user.upd_permit==1 && user.level.indexOf('1')>-1)"
+    <button mat-flat-button color="primary" [disabled]="f.invalid || !(user.user_id==detail.sw_emp) || detail.sw_status!=0 || isupdate" *ngIf="(user.upd_permit==1 && user.level.indexOf('1')>-1)"
       (click)="update()">ปรับปรุง</button>
     <button mat-flat-button color="primary" [disabled]="f.invalid || detail.sw_status!=1 || isupdate" *ngIf="(user.upd_permit==1 && user.level.indexOf('2')>-1)"
       (click)="update()">ปรับปรุง</button>
@@ -100,7 +100,7 @@
       (click)="update()">ปรับปรุง</button>
 
 
-    <button mat-flat-button color="accent" [disabled]="detail.sw_status!=0 || isapprove" *ngIf="(user.upd_permit==1 && user.level.indexOf('1')>-1)"
+    <button mat-flat-button color="accent" [disabled]="detail.sw_status!=0 || !(user.user_id==detail.sw_emp) || isapprove" *ngIf="(user.upd_permit==1 && user.level.indexOf('1')>-1)"
       (click)="approve($event)">เสนออนุมัติ</button>
     <button mat-flat-button color="accent" [disabled]="detail.sw_status!=1 || isapprove" *ngIf="(user.upd_permit==1 && user.level.indexOf('2')>-1)" (click)="approve($event)">เสนออนุมัติ</button>
     <button mat-flat-button color="accent" [disabled]="detail.sw_status!=2 || isapprove" *ngIf="(user.upd_permit==1 && user.level.indexOf('3')>-1)"
