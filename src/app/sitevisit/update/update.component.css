@@ -12,7 +12,9 @@
 .mat-card-footer button{
   margin:5px;
 }
-
+.tooltip {
+  background: #126661;
+}
 
 /*time-line*/
 .root {

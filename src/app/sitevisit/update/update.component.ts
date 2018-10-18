@@ -22,12 +22,18 @@ export interface detailModel {
   sw_rg_remark?: any;
   sw_rg_filedoc?: any;
   sw_rg_approveid?: any;
+  rg_name?: any;
+  sw_rg_approve_datetime?: any;
   sw_mts_remark?: any;
   sw_mts_filedoc?: any;
   sw_mt_approveid?: any;
+  mts_name?: any;
+  sw_mts_approve_datetime?: any;
   sw_center_remark?: any;
   sw_center_filedoc?: any;
   sw_center_approveid?: any;
+  center_name?: any;
+  sw_center_approve_datetime?: any;
   sw_upd_datetime?: any;
   visit_date?: any;
   place?: any;

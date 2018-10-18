@@ -2,11 +2,11 @@
   <br><br><br>
     <div class="root" style="width:100%;overflow-x:auto;">
         <ul class="progressbar">
-          <li [ngClass]="{'active':detail.sw_status>=0}">รอเสนออนุมัติ</li>
-          <li [ngClass]="{'active':detail.sw_status>=1}">sw ภาคเสนออนุมัติ</li>
-          <li [ngClass]="{'active':detail.sw_status>=2}">วิชาการภาคเสนออนุมัติ</li>
-          <li [ngClass]="{'active':detail.sw_status>=3}">MTS เสนออนุมัติ</li>
-          <li [ngClass]="{'active':detail.sw_status>=4}">วิชาการกลางเสนออนุมัติ</li>
+          <li [ngClass]="{'active':detail.sw_status>=0}" [style.cursor]="'pointer'" matTooltipClass='tooltip' [matTooltip]="'โดย: '+detail.cdg_name"  [matTooltipDisabled]="true">รอเสนออนุมัติ</li>
+          <li [ngClass]="{'active':detail.sw_status>=1}" [style.cursor]="'pointer'" matTooltipClass='tooltip' [matTooltip]="'โดย: '+detail.cdg_name" [matTooltipDisabled]="detail.sw_status>=1">sw ภาคเสนออนุมัติ</li>
+          <li [ngClass]="{'active':detail.sw_status>=2}" [style.cursor]="'pointer'" matTooltipClass='tooltip' [matTooltip]="'โดย: '+detail.rg_name" [matTooltipDisabled]="detail.sw_status>=2">วิชาการภาคเสนออนุมัติ</li>
+          <li [ngClass]="{'active':detail.sw_status>=3}" [style.cursor]="'pointer'" matTooltipClass='tooltip' [matTooltip]="'โดย: '+detail.mts_name" [matTooltipDisabled]="detail.sw_status>=3">MTS เสนออนุมัติ</li>
+          <li [ngClass]="{'active':detail.sw_status>=4}" [style.cursor]="'pointer'" matTooltipClass='tooltip' [matTooltip]="'โดย: '+detail.center_name" [matTooltipDisabled]="detail.sw_status>=4">วิชาการกลางเสนออนุมัติ</li>
         </ul>
     </div>
 
