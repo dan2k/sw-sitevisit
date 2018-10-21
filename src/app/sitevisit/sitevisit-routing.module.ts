@@ -9,7 +9,9 @@ const routes: Routes = [
   { path: 'main', component: MainComponent },
   { path: 'main/:start/:end/:status/:pageIndex/:pageSize', component: MainComponent },
   { path: 'add', component: AddComponent },
-  { path: 'update/:sw_no/:start/:end/:status/:pageIndex/:pageSize', component:UpdateComponent},
+  { path: 'update/:sw_no/:start/:end/:status/:pageIndex/:pageSize', component: UpdateComponent },
+  // { path: "update/:sw_no/''/''/:status/:pageIndex/:pageSize", redirectTo: 'update', pathMatch: 'full' },
+  // { path: "update/:sw_no/''/''/''/:pageIndex/:pageSize", redirectTo:'update',pathMatch:'full'},
   { path: '**', redirectTo: 'main', pathMatch: 'full' },
 ];
 @NgModule({
