@@ -62,6 +62,7 @@
 }
 .progressbar li.active {
   color: green;
+  cursor:pointer;
 }
 .progressbar li.active:before {
   border-color: #55b776;

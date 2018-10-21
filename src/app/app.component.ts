@@ -12,11 +12,11 @@ export class AppComponent implements OnDestroy {
   mobileQuery: MediaQueryList;
   title = "SW Site Visit";
   user: any = {};
-  fillerNav = [
-    { title: 'หน้าหลัก', link: 'main',icon:'home' },
-    { title: 'บันทึกข้อเสนอแนะโปรแกรม', link: "add",icon:'add_box' },
-    { title: 'รายงาน',link:'report',icon:'reorder'}
-  ]
+  // fillerNav = [
+  //   { title: 'หน้าหลัก', link: 'main',icon:'home' },
+  //   { title: 'บันทึกข้อเสนอแนะโปรแกรม', link: "add",icon:'add_box' },
+  //   { title: 'รายงาน',link:'report',icon:'reorder'}
+  // ]
   private _mobileQueryListener: () => void;
   constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private service: AuthService) {
     this.service.getAuth().subscribe((data: any) => {
