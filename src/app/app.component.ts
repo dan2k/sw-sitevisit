@@ -17,6 +17,7 @@ export class AppComponent implements OnDestroy {
   //   { title: 'บันทึกข้อเสนอแนะโปรแกรม', link: "add",icon:'add_box' },
   //   { title: 'รายงาน',link:'report',icon:'reorder'}
   // ]
+  level: any = [];
   private _mobileQueryListener: () => void;
   constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private service: AuthService) {
     this.service.getAuth().subscribe((data: any) => {
@@ -24,7 +25,7 @@ export class AppComponent implements OnDestroy {
         localStorage.removeItem('sitevisitProfile');
         localStorage.setItem('sitevisitProfile', JSON.stringify(data.data));
         this.user = data.data;
-        
+        this.level = data.data.level;
       } else {
         location.href = `http://${HOST}/mpsicc`;
       }
