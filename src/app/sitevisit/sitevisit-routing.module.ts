@@ -1,5 +1,5 @@
-import { UpdateComponent } from './update/update.component';
-import { MainComponent } from './main/main.component';
+ import { UpdateComponent } from './update/update.component';
+ import { MainComponent } from './main/main.component';
 import { AddComponent } from './add/add.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -11,7 +11,6 @@ const routes: Routes = [
   { path: 'add', component: AddComponent },
   { path: 'update/:sw_no/:start/:end/:status/:pageIndex/:pageSize', component:UpdateComponent},
   { path: '**', redirectTo: 'main', pathMatch: 'full' },
-
 ];
 @NgModule({
   imports: [RouterModule.forChild(routes)],

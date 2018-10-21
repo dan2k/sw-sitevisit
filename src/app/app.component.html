@@ -15,6 +15,7 @@
         <a mat-list-item routerLink="main" (click)="snav.toggle()">
           <i class="material-icons">home</i>&nbsp;หน้าหลัก
         </a>
+        <!-- <a mat-list-item routerLink="add" (click)="snav.toggle()" > -->
         <a mat-list-item routerLink="add" (click)="snav.toggle()" [hidden]="!(level.indexOf('1')>-1&& user.upd_permit==1)">
           <i class="material-icons">add_box</i>&nbsp;บันทึกข้อเสนอแนะโปรแกรม
         </a>

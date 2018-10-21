@@ -1,87 +1,87 @@
 <div class="example-container mat-elevation-z8">
-    <div class="example-loading-shade"
-        *ngIf="isLoadingResults || isRateLimitReached">
-      <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
-      <div class="example-rate-limit-reached" *ngIf="isRateLimitReached">
-        GitHub's API rate limit has been reached. It will be reset in one minute.
-      </div>
+  <div class="example-loading-shade"
+      *ngIf="isLoadingResults || isRateLimitReached">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+    <div class="example-rate-limit-reached" *ngIf="isRateLimitReached">
+      GitHub's API rate limit has been reached. It will be reset in one minute.
     </div>
-  <button mat-mini-fab color="primary" class="fbmobile" (click)="ismobile=!ismobile">+</button>
-  <mat-form-field class="mobile-full-width mobile" [style.display]="(ismobile || isDesktop) ? 'inline-block' : 'none'">
-    <input matInput [matDatepicker]="start" placeholder="วันที่เริ่มต้น" [formControl]="startDate" >
-    <mat-datepicker-toggle matSuffix [for]="start"></mat-datepicker-toggle>
-    <mat-datepicker touchUi #start disabled="false"></mat-datepicker>
-  </mat-form-field>
-  <mat-form-field class="mobile-full-width mobile" [style.display]="(ismobile|| isDesktop) ? 'inline-block' : 'none'">
-    <input matInput [matDatepicker]="end" placeholder="วันที่สิ้นสุด" [formControl]="endDate" >
-    <mat-datepicker-toggle matSuffix [for]="end"></mat-datepicker-toggle>
-    <mat-datepicker touchUi #end disabled="false"></mat-datepicker>
-  </mat-form-field>
-  <mat-form-field class="mobile-full-width mobile" [style.display]="(ismobile|| isDesktop) ? 'inline-block' : 'none'">
-    <mat-select placeholder="สถานะ" [formControl]="status">
-      <mat-option value=''>ทั้งหมด</mat-option>
-      <mat-option value="0">รอเสนออนุมัติ</mat-option>
-      <mat-option value="1">sw ภาคเสนออนุมัติ</mat-option>
-      <mat-option value="2">วิชาการภาคเสนออนุมัติ</mat-option>
-      <mat-option value="3">MTS เสนออนุมัติ</mat-option>
-      <mat-option value="4">วิชาการกลางเสนออนุมัติ</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <button mat-flat-button color="primary" class="mobile" [style.display]="(ismobile|| isDesktop) ? 'inline-block' : 'none'" (click)="search()">
-      <mat-icon>search</mat-icon>
-  </button>
-  <button mat-flat-button color="accent" class="mobile" [style.display]="(ismobile|| isDesktop) ? 'inline-block' : 'none'" (click)="clear()">
-      <mat-icon>clear_all</mat-icon>
-  </button>
-  <mat-paginator [length]="resultsLength" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
-  <!-- <mat-table [dataSource]="dataSource" [class.isMobile]="isMobile" > -->
-  <mat-table [dataSource]="dataSource"
-  matSort matSortActive="sw_no" matSortDisableClear matSortDirection="asc">
+  </div>
+<button mat-mini-fab color="primary" class="fbmobile" (click)="ismobile=!ismobile">+</button>
+<mat-form-field class="mobile-full-width mobile" [style.display]="(ismobile || isDesktop) ? 'inline-block' : 'none'">
+  <input matInput [matDatepicker]="start" placeholder="วันที่เริ่มต้น" [formControl]="startDate" >
+  <mat-datepicker-toggle matSuffix [for]="start"></mat-datepicker-toggle>
+  <mat-datepicker touchUi #start disabled="false"></mat-datepicker>
+</mat-form-field>
+<mat-form-field class="mobile-full-width mobile" [style.display]="(ismobile|| isDesktop) ? 'inline-block' : 'none'">
+  <input matInput [matDatepicker]="end" placeholder="วันที่สิ้นสุด" [formControl]="endDate" >
+  <mat-datepicker-toggle matSuffix [for]="end"></mat-datepicker-toggle>
+  <mat-datepicker touchUi #end disabled="false"></mat-datepicker>
+</mat-form-field>
+<mat-form-field class="mobile-full-width mobile" [style.display]="(ismobile|| isDesktop) ? 'inline-block' : 'none'">
+  <mat-select placeholder="สถานะ" [formControl]="status">
+    <mat-option value=''>ทั้งหมด</mat-option>
+    <mat-option value="0">รอเสนออนุมัติ</mat-option>
+    <mat-option value="1">sw ภาคเสนออนุมัติ</mat-option>
+    <mat-option value="2">วิชาการภาคเสนออนุมัติ</mat-option>
+    <mat-option value="3">MTS เสนออนุมัติ</mat-option>
+    <mat-option value="4">วิชาการกลางเสนออนุมัติ</mat-option>
+  </mat-select>
+</mat-form-field>
+<button mat-flat-button color="primary" class="mobile" [style.display]="(ismobile|| isDesktop) ? 'inline-block' : 'none'" (click)="search()">
+    <mat-icon>search</mat-icon>
+</button>
+<button mat-flat-button color="accent" class="mobile" [style.display]="(ismobile|| isDesktop) ? 'inline-block' : 'none'" (click)="clear()">
+    <mat-icon>clear_all</mat-icon>
+</button>
+<mat-paginator [length]="resultsLength" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+<!-- <mat-table [dataSource]="dataSource" [class.isMobile]="isMobile" > -->
+<mat-table [dataSource]="dataSource"
+matSort matSortActive="sw_no" matSortDisableClear matSortDirection="asc">
 
-    <!-- Checkbox Column -->
-    <ng-container matColumnDef="no">
-      <mat-header-cell *matHeaderCellDef>::</mat-header-cell>
-      <mat-cell *matCellDef="let index=index">{{(paginator.pageIndex*paginator.pageSize)+(index+1)}}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="sw_no">
-      <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>No.</mat-header-cell>
-      <mat-cell *matCellDef="let item" data-label="No:" >{{item.sw_no}}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="visit_date">
-      <mat-header-cell *matHeaderCellDef>วันที่ตรวจเยี่ยม</mat-header-cell>
-      <mat-cell *matCellDef="let item" data-label="วันที่ตรวจเยี่ยม: ">{{item.visit_date}} </mat-cell>
-    </ng-container>
+  <!-- Checkbox Column -->
+  <ng-container matColumnDef="no">
+    <mat-header-cell *matHeaderCellDef>::</mat-header-cell>
+    <mat-cell *matCellDef="let index=index">{{(paginator.pageIndex*paginator.pageSize)+(index+1)}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="sw_no">
+    <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>No.</mat-header-cell>
+    <mat-cell *matCellDef="let item" data-label="No:" >{{item.sw_no}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="visit_date">
+    <mat-header-cell *matHeaderCellDef>วันที่ตรวจเยี่ยม</mat-header-cell>
+    <mat-cell *matCellDef="let item" data-label="วันที่ตรวจเยี่ยม: ">{{item.visit_date}} </mat-cell>
+  </ng-container>
 
-    <ng-container matColumnDef="sys">
-      <mat-header-cell *matHeaderCellDef> ระบบ/โปรแกรม </mat-header-cell>
-      <mat-cell *matCellDef="let item" data-label="ระบบ/โปรแกรม: ">{{item.prob_gdesc+'/'+item.problem_sub_desc}}
-      </mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="detail">
-      <mat-header-cell *matHeaderCellDef> ปัญหาที่พบ: </mat-header-cell>
-      <mat-cell *matCellDef="let item" data-label="ปัญหาที่พบ: ">{{item.sw_detail}} </mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="suggestion">
-      <mat-header-cell *matHeaderCellDef>ข้อเสนอแนะ:</mat-header-cell>
-      <mat-cell *matCellDef="let item" data-label="ข้อเสนอแนะ: ">{{item.sw_suggestion}} </mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="status">
-      <mat-header-cell *matHeaderCellDef> สถานะ: </mat-header-cell>
-      <mat-cell *matCellDef="let item" data-label="สถานะ: ">{{item.status_desc}} </mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="upd_date">
-      <mat-header-cell *matHeaderCellDef>วันเวลาปรับปรุง </mat-header-cell>
-      <mat-cell *matCellDef="let item" data-label="วันเวลาปรับปรุง: ">{{item.upd_date}} </mat-cell>
-    </ng-container>
+  <ng-container matColumnDef="sys">
+    <mat-header-cell *matHeaderCellDef> ระบบ/โปรแกรม </mat-header-cell>
+    <mat-cell *matCellDef="let item" data-label="ระบบ/โปรแกรม: ">{{item.prob_gdesc+'/'+item.problem_sub_desc}}
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="detail">
+    <mat-header-cell *matHeaderCellDef> ปัญหาที่พบ: </mat-header-cell>
+    <mat-cell *matCellDef="let item" data-label="ปัญหาที่พบ: ">{{item.sw_detail}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="suggestion">
+    <mat-header-cell *matHeaderCellDef>ข้อเสนอแนะ:</mat-header-cell>
+    <mat-cell *matCellDef="let item" data-label="ข้อเสนอแนะ: ">{{item.sw_suggestion}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="status">
+    <mat-header-cell *matHeaderCellDef> สถานะ: </mat-header-cell>
+    <mat-cell *matCellDef="let item" data-label="สถานะ: ">{{item.status_desc}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="upd_date">
+    <mat-header-cell *matHeaderCellDef>วันเวลาปรับปรุง </mat-header-cell>
+    <mat-cell *matCellDef="let item" data-label="วันเวลาปรับปรุง: ">{{item.upd_date}} </mat-cell>
+  </ng-container>
 
-    <ng-container matColumnDef="action">
-      <mat-header-cell *matHeaderCellDef> :: </mat-header-cell>
-      <mat-cell *matCellDef="let row"> <button class="btn btn-default btn-sm" (click)="show(row.sw_no)">รายละเอียด</button>
-      </mat-cell>
-    </ng-container>
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-  </mat-table>
+  <ng-container matColumnDef="action">
+    <mat-header-cell *matHeaderCellDef> :: </mat-header-cell>
+    <mat-cell *matCellDef="let row"> <button class="btn btn-default btn-sm" (click)="show(row.sw_no)">รายละเอียด</button>
+    </mat-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
 
 
 
