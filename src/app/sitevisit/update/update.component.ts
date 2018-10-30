@@ -8,6 +8,8 @@ export interface detailModel {
   sw_no?: any;
   sw_user_id?: any;
   sw_emp?: any;
+  sw_approve_datetime1?: any;
+  sw_approve_datetime2?: any;
   sw_add_date?: any;
   cust_ptype?: any;
   cust_pcode?: any;
@@ -110,7 +112,7 @@ export class UpdateComponent implements OnInit {
       }
     });
   }
-  update() {
+  update(levelx:any) {
     let level: any;
     let detail: any;
     let remark: any;
@@ -122,8 +124,8 @@ export class UpdateComponent implements OnInit {
         break;
       case "1":
         level = 2;
-        detail = this.detail.sw_detail;
-        remark = this.detail.sw_rg_remark;
+        // detail = this.detail.sw_detail;
+        // remark = this.detail.sw_rg_remark;
         break;
       case "2":
         level = 3;
@@ -132,6 +134,11 @@ export class UpdateComponent implements OnInit {
         break;
       case "3":
         level = 4;
+        detail = this.detail.sw_detail;
+        remark = this.detail.sw_rg_remark;
+        break;
+      case "4":
+        level = 5;
         detail = this.detail.sw_detail;
         remark = this.detail.sw_center_remark;
         break;
@@ -168,6 +175,9 @@ export class UpdateComponent implements OnInit {
       case "3":
         level = 4;
         break;
+      case "4":
+        level = 5;
+        break;
     }
     let toast = this.toast.info('กำลังลบไฟล์', null, { disableTimeOut: false });
     this.service.del(this.detail.sw_no, level,filedoc).subscribe((data: any) => {
@@ -179,14 +189,17 @@ export class UpdateComponent implements OnInit {
             this.detail.sw_filedoc='';
             break;
           case "1":
-            this.detail.sw_rg_filedoc='';
+            this.detail.sw_mts_filedoc='';
             break;
           case "2":
           this.detail.sw_mts_filedoc='';
             break;
           case "3":
-          this.detail.sw_center_filedoc='';
+          this.detail.sw_rg_filedoc='';
             break;
+            case "4":
+            this.detail.sw_center_filedoc='';
+              break;
         }
       } else {
         this.toast.error(data.msg, null, { disableTimeOut: false });
@@ -195,7 +208,7 @@ export class UpdateComponent implements OnInit {
     });
 
   }
-  approve() {
+  approve(levelx:any) {
     let level: any;
     switch (this.detail.sw_status) {
       case "0":
@@ -209,6 +222,9 @@ export class UpdateComponent implements OnInit {
         break;
       case "3":
         level = 4;
+        break;
+      case "4":
+        level = 5;
         break;
     }
     let toast = this.toast.info('กำลังอัพเดตข้อมูล', null, { disableTimeOut: false });
@@ -240,6 +256,9 @@ export class UpdateComponent implements OnInit {
       case "3":
         level = 4;
         break;
+      case "4":
+        level = 5;
+        break;
     }
     this.filedoc = file.files[0].name;
     let patternImg = /image\/*/;
@@ -265,19 +284,22 @@ export class UpdateComponent implements OnInit {
             this.toast.success('upload is ' + data.upload, null, { timeOut: 2000 });
             // this.rout.navigate(["./main"]);
             // this.rout.navigate(['update', this.sw_no,this.start,this.end,this.status,this.pageIndex]);
-          //  location.reload();
+            //  location.reload();
           switch (this.detail.sw_status) {
             case "0":
               this.detail.sw_filedoc=data.filedoc;
               break;
             case "1":
-              this.detail.sw_rg_filedoc=data.filedoc;
+              this.detail.sw_mts_filedoc=data.filedoc;
               break;
             case "2":
             this.detail.sw_mts_filedoc=data.filedoc;
               break;
             case "3":
-            this.detail.sw_center_filedoc=data.filedoc;
+            this.detail.sw_rg_filedoc=data.filedoc;
+              break;
+            case "4":
+              this.detail.sw_center_filedoc=data.filedoc;
               break;
           }
           file.value = '';
@@ -286,5 +308,11 @@ export class UpdateComponent implements OnInit {
             console.log(data);
         }
     });
+  }
+  bug() {
+    
+  }
+  dup() {
+
   }
 }

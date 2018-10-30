@@ -42,45 +42,60 @@
             (click)="del(detail.sw_filedoc)">ลบ</a></span>
       </mat-form-field>
       <mat-form-field style="width:95%">
-        <textarea matInput placeholder="ข้อเสนอแนะวิชาการภาค" #sw_rg_remark name="sw_rg_remark" [(ngModel)]="detail.sw_rg_remark"
-          [disabled]="detail.sw_status!=1 || !(user.user_id==detail.sw_emp && user.upd_permit==1 && user.level.indexOf('2')>-1) || isupdate"></textarea>
-        <span style="font-size:10px;" [hidden]="detail.sw_rg_filedoc===null||detail.sw_rg_filedoc===''"><a (click)="open(detail.sw_rg_filedoc)"
-            mat-button color="accent">เอกสารแนบ</a><a mat-button color="warn" [disabled]="detail.sw_status!=1 || !(user.user_id==detail.sw_emp && user.upd_permit==1 && user.level.indexOf('2')>-1) || isupdate"
-            (click)="del(detail.sw_rg_filedoc)">ลบ</a></span>
-      </mat-form-field>
-      <mat-form-field style="width:95%">
-        <textarea matInput placeholder="ข้อเสนอแนะ MTS" #sw_mts_remark name="sw_mts_remark" [(ngModel)]="detail.sw_mts_remark"
-          [disabled]="detail.sw_status!=2 || !(user.upd_permit==1 && user.level.indexOf('3')>-1)  || isupdate"></textarea>
+        <textarea matInput placeholder="ข้อเสนอแนะหลังจากสรุปกับ MTS" #sw_mts_remark name="sw_mts_remark" [(ngModel)]="detail.sw_mts_remark"
+          [disabled]="detail.sw_status!=2 || !(user.upd_permit==1 && user.level.indexOf('1')>-1)  || isupdate"></textarea>
         <span style="font-size:10px;" [hidden]="detail.sw_mts_filedoc===null||detail.sw_mts_filedoc===''"><a (click)="open(detail.sw_mts_filedoc)"
-            mat-button color="accent">เอกสารแนบ</a><a mat-button color="warn" [disabled]="detail.sw_status!=2|| !(user.upd_permit==1 && user.level.indexOf('3')>-1) || isupdate"
+            mat-button color="accent">เอกสารแนบ</a><a mat-button color="warn" [disabled]="detail.sw_status!=2|| !(user.upd_permit==1 && user.level.indexOf('1')>-1) || isupdate"
             (click)="del(detail.sw_mts_filedoc)">ลบ</a></span>
       </mat-form-field>
       <mat-form-field style="width:95%">
+          <textarea matInput placeholder="ข้อเสนอแนะวิชาการภาค" #sw_rg_remark name="sw_rg_remark" [(ngModel)]="detail.sw_rg_remark"
+            [disabled]="detail.sw_status!=3 || !(user.user_id==detail.sw_emp && user.upd_permit==1 && user.level.indexOf('2')>-1) || isupdate"></textarea>
+          <span style="font-size:10px;" [hidden]="detail.sw_rg_filedoc===null||detail.sw_rg_filedoc===''"><a (click)="open(detail.sw_rg_filedoc)"
+              mat-button color="accent">เอกสารแนบ</a><a mat-button color="warn" [disabled]="detail.sw_status!=3 || !(user.user_id==detail.sw_emp && user.upd_permit==1 && user.level.indexOf('2')>-1) || isupdate"
+              (click)="del(detail.sw_rg_filedoc)">ลบ</a></span>
+        </mat-form-field>
+      <mat-form-field style="width:95%">
         <textarea matInput placeholder="ข้อเสนอแนะวิชาการกลาง" #sw_center_remark name="sw_center_remark" [(ngModel)]="detail.sw_center_remark"
-          [disabled]="detail.sw_status!=3 || !(user.upd_permit==1 && user.level.indexOf('4')>-1) || isupdate"></textarea>
+          [disabled]="detail.sw_status!=4 || !(user.upd_permit==1 && user.level.indexOf('4')>-1) || isupdate"></textarea>
         <span style="font-size:10px;" [hidden]="detail.sw_center_filedoc===null||detail.sw_center_filedoc===''"><a
             (click)="open(detail.sw_center_filedoc)" mat-button color="accent">เอกสารแนบ</a><a mat-button color="warn"
-            [disabled]="detail.sw_status!=3|| !(user.upd_permit==1 && user.level.indexOf('4')>-1) || isupdate" (click)="del(detail.sw_center_filedoc)">ลบ</a></span>
+            [disabled]="detail.sw_status!=4 || !(user.upd_permit==1 && user.level.indexOf('4')>-1) || isupdate" (click)="del(detail.sw_center_filedoc)">ลบ</a></span>
       </mat-form-field>
     </form>
   </mat-card-content>
   <mat-card-actions>
-    <button type="button" mat-button color="warn" (click)="file.click()" [disabled]="f.invalid || detail.sw_status!=0 || isupdate"
+    <button type="button" mat-button color="warn"
+      (click)="file.click()"
+      [disabled]="f.invalid || detail.sw_status!=0 || isupdate"
       *ngIf="(user.upd_permit==1 && user.level.indexOf('1')>-1)">
       <mat-icon>file_upload</mat-icon>
       upload
     </button>
-    <button type="button" mat-button color="warn" (click)="file.click()" [disabled]="f.invalid || detail.sw_status!=1 || isupdate"
-      *ngIf="(user.upd_permit==1 && user.level.indexOf('2')>-1)">
-      <mat-icon>file_upload</mat-icon>
-      upload
-    </button>
-    <button type="button" mat-button color="warn" (click)="file.click()" [disabled]="f.invalid || detail.sw_status!=2 || isupdate"
+    <button type="button" mat-button color="warn"
+      (click)="file.click()"
+      [disabled]="f.invalid || detail.sw_status!=1 || isupdate"
       *ngIf="(user.upd_permit==1 && user.level.indexOf('3')>-1)">
       <mat-icon>file_upload</mat-icon>
       upload
     </button>
-    <button type="button" mat-button color="warn" (click)="file.click()" [disabled]="f.invalid || detail.sw_status!=3 || isupdate"
+    <button type="button" mat-button color="warn"
+      (click)="file.click()"
+      [disabled]="f.invalid || detail.sw_status!=2 || isupdate"
+      *ngIf="(user.upd_permit==1 && user.level.indexOf('1')>-1)">
+      <mat-icon>file_upload</mat-icon>
+      upload
+    </button>
+    <button type="button" mat-button color="warn"
+      (click)="file.click()"
+      [disabled]="f.invalid || detail.sw_status!=3 || isupdate"
+      *ngIf="(user.upd_permit==1 && user.level.indexOf('2')>-1)">
+      <mat-icon>file_upload</mat-icon>
+      upload
+    </button>
+    <button type="button" mat-button color="warn"
+      (click)="file.click()"
+      [disabled]="f.invalid || detail.sw_status!=4 || isupdate"
       *ngIf="(user.upd_permit==1 && user.level.indexOf('4')>-1)">
       <mat-icon>file_upload</mat-icon>
       upload
@@ -89,24 +104,56 @@
     <input type="file" #file style="display:none;" accept="image/*,application/pdf" (change)="upload(file)">
   </mat-card-actions>
   <mat-card-footer>
-    <button mat-flat-button color="primary" [disabled]="f.invalid || !(user.user_id==detail.sw_emp) || detail.sw_status!=0 || isupdate" *ngIf="(user.upd_permit==1 && user.level.indexOf('1')>-1)"
-      (click)="update()">ปรับปรุง</button>
-    <button mat-flat-button color="primary" [disabled]="f.invalid || detail.sw_status!=1 || isupdate" *ngIf="(user.upd_permit==1 && user.level.indexOf('2')>-1)"
-      (click)="update()">ปรับปรุง</button>
-    <button mat-flat-button color="primary" [disabled]="f.invalid || detail.sw_status!=2 || isupdate" *ngIf="(user.upd_permit==1 && user.level.indexOf('3')>-1)"
-      (click)="update()">ปรับปรุง</button>
-    <button mat-flat-button color="primary" [disabled]="f.invalid || detail.sw_status!=3 || isupdate" *ngIf="(user.upd_permit==1 && user.level.indexOf('4')>-1)"
-      (click)="update()">ปรับปรุง</button>
+    <button mat-flat-button color="primary"
+      [disabled]="f.invalid || !(user.user_id==detail.sw_emp) || detail.sw_status!=0 || isupdate"
+      *ngIf="(user.upd_permit==1 && user.level.indexOf('1')>-1)"
+      (click)="update('1')">ปรับปรุง</button>
+    <button mat-flat-button color="primary"
+      [disabled]="f.invalid || detail.sw_status!=1 || isupdate"
+      *ngIf="(user.upd_permit==1 && user.level.indexOf('3')>-1)"
+      (click)="update('2')">ปรับปรุง</button>
+    <button mat-flat-button color="primary"
+      [disabled]="f.invalid || detail.sw_status!=2 || isupdate"
+      *ngIf="(user.upd_permit==1 && user.level.indexOf('1')>-1)"
+      (click)="update('3')">ปรับปรุง</button>
+    <button mat-flat-button color="primary"
+      [disabled]="f.invalid || detail.sw_status!=3 || isupdate"
+      *ngIf="(user.upd_permit==1 && user.level.indexOf('2')>-1)"
+      (click)="update('4')">ปรับปรุง</button>
+    <button mat-flat-button color="primary"
+      [disabled]="f.invalid || detail.sw_status!=4 || isupdate"
+      *ngIf="(user.upd_permit==1 && user.level.indexOf('4')>-1)"
+      (click)="update('5')">ปรับปรุง</button>
 
 
-    <button mat-flat-button color="accent" [disabled]="detail.sw_status!=0 || !(user.user_id==detail.sw_emp) || isapprove" *ngIf="(user.upd_permit==1 && user.level.indexOf('1')>-1)"
-      (click)="approve($event)">เสนออนุมัติ</button>
-    <button mat-flat-button color="accent" [disabled]="detail.sw_status!=1 || isapprove" *ngIf="(user.upd_permit==1 && user.level.indexOf('2')>-1)" (click)="approve($event)">เสนออนุมัติ</button>
-    <button mat-flat-button color="accent" [disabled]="detail.sw_status!=2 || isapprove" *ngIf="(user.upd_permit==1 && user.level.indexOf('3')>-1)"
-      (click)="approve($event)">เสนออนุมัติ</button>
-    <button mat-flat-button color="accent" [disabled]="detail.sw_status!=3 || isapprove" *ngIf="(user.upd_permit==1 && user.level.indexOf('4')>-1)"
-      (click)="approve($event)">เสนออนุมัติ</button>
+    <button mat-flat-button color="accent"
+      [disabled]="detail.sw_status!=0 || !(user.user_id==detail.sw_emp) || isapprove"
+      *ngIf="(user.upd_permit==1 && user.level.indexOf('1')>-1)"
+      (click)="approve('1')">เสนออนุมัติ</button>
+    <button mat-flat-button color="accent"
+      [disabled]="detail.sw_status!=1 || isapprove"
+      *ngIf="(user.upd_permit==1 && user.level.indexOf('3')>-1)"
+      (click)="approve('2')">เสนออนุมัติ</button>
+    <button mat-flat-button color="accent"
+      [disabled]="detail.sw_status!=2 || isapprove"
+      *ngIf="(user.upd_permit==1 && user.level.indexOf('1')>-1)"
+      (click)="approve('3')">เสนออนุมัติ</button>
+    <button mat-flat-button color="accent"
+      [disabled]="detail.sw_status!=3 || isapprove"
+      *ngIf="(user.upd_permit==1 && user.level.indexOf('2')>-1)"
+      (click)="approve('4')">เสนออนุมัติ</button>
+    <button mat-flat-button color="accent"
+      [disabled]="detail.sw_status!=4 || isapprove"
+      *ngIf="(user.upd_permit==1 && user.level.indexOf('4')>-1)"
+      (click)="approve('5')">เสนออนุมัติ</button>
+      <button mat-flat-button color="accent"
+        (click)="bug()"
+        *ngIf="(detail.sw_status==0 && user.upd_permit==1 && detail.sw_emp==user.user_id && user.level.indexOf('1')>-1)"><mat-icon >bug_report</mat-icon></button>
+      <button mat-flat-button color="accent"
+        (click)="dup()"
+        *ngIf="(detail.sw_status==1 && user.upd_permit==1 && user.level.indexOf('3')>-1)"><mat-icon >control_point_duplicate</mat-icon></button>
       <button mat-flat-button color="primary" (click)="print()"><mat-icon >print</mat-icon></button>
+
     <button mat-flat-button color="warn" (click)="back()">ปิด</button>
   </mat-card-footer>
 </mat-card>

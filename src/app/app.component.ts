@@ -1,7 +1,8 @@
+import { Router,ActivatedRoute,NavigationEnd } from '@angular/router';
 import { MediaMatcher } from "@angular/cdk/layout";
 import { ChangeDetectorRef, Component, OnDestroy } from "@angular/core";
 import { AuthService } from './auth.service';
-import { HOST } from './config'
+import { HOST } from './config';
 
 @Component({
   selector: "app-root",
@@ -12,14 +13,18 @@ export class AppComponent implements OnDestroy {
   mobileQuery: MediaQueryList;
   title = "SW Site Visit";
   user: any = {};
-  // fillerNav = [
-  //   { title: 'หน้าหลัก', link: 'main',icon:'home' },
-  //   { title: 'บันทึกข้อเสนอแนะโปรแกรม', link: "add",icon:'add_box' },
-  //   { title: 'รายงาน',link:'report',icon:'reorder'}
-  // ]
   level: any = [];
+  activeUrl: any;
   private _mobileQueryListener: () => void;
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private service: AuthService) {
+  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private service: AuthService,public router:Router,activatedRoute:ActivatedRoute) {
+    this.router.events.subscribe(
+      (event: any) => {
+        if (event instanceof NavigationEnd) {
+          this.activeUrl = this.router.url.split('/')[1];
+          console.log('this.router.url', this.router.url);
+        }
+      }
+    );
     this.service.getAuth().subscribe((data: any) => {
       if (data.status) {
         localStorage.removeItem('sitevisitProfile');

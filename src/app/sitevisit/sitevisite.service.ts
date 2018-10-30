@@ -100,7 +100,18 @@ export class SitevisiteService {
       .set('sw_no', sw_no);
     return this.http.get(`${url}/sitevisit.php`, { params: params });
   }
-
+  sendBug(sw_no:any) {
+    let params = new HttpParams()
+      .set('action', 'sendBug')
+      .set('sw_no', sw_no);
+    return this.http.get(`${url}/sitevisit.php`, { params: params });
+  }
+  sendDup(sw_no:any) {
+    let params = new HttpParams()
+      .set('action', 'sendDup')
+      .set('sw_no', sw_no);
+    return this.http.get(`${url}/sitevisit.php`, { params: params });
+  }
   formatDate(date) {
     var d = new Date(date),
       month = "" + (d.getMonth() + 1),
