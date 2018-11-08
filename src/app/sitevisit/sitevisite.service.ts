@@ -58,6 +58,24 @@ export class SitevisiteService {
   upload(formData: any) {
     return this.http.post(`${url}/sitevisit.php`, formData);
   }
+  getApprove() {
+    let params = new HttpParams()
+      .set('action', 'getApprove');
+    return this.http.get(`${url}/sitevisit.php`, { params: params });
+  }
+  ckSw(swno: any) {
+    let params = new HttpParams()
+      .set('action', 'ckSw')
+      .set('swno',swno);
+    return this.http.get(`${url}/sitevisit.php`, { params: params });
+  }
+  updup(dupswno,swno: any) {
+    let params = new HttpParams()
+      .set('action', 'updup')
+      .set('swno', swno)
+      .set('dupswno',dupswno);
+    return this.http.get(`${url}/sitevisit.php`, { params: params });
+  }
   del(sw_no: any, level: any, filedoc) {
     let params = new HttpParams()
       .set('action', 'del')
@@ -82,7 +100,14 @@ export class SitevisiteService {
       .set('level', level);
     return this.http.get(`${url}/sitevisit.php`, { params: params });
   }
-  getData(start='',end='',status='',sort='',order='',page?:any,pageSize?:any) {
+  noapprove(sw_no: any, level: any) {
+    let params = new HttpParams()
+      .set('action', 'noapprove')
+      .set('sw_no', sw_no)
+      .set('level', level);
+    return this.http.get(`${url}/sitevisit.php`, { params: params });
+  }
+  getData(start = '', end = '', status = '', sort = '', order = '', page?: any, pageSize?: any, region?: any,probgid?:any,problemsubid?:any) {
     let params = new HttpParams()
       .set('action', 'getData')
       .set('start', start)
@@ -91,7 +116,10 @@ export class SitevisiteService {
       .set('sort', sort)
       .set('order', order)
       .set('page', page)
-      .set('pageSize',pageSize);
+      .set('pageSize', pageSize)
+      .set('region', region)
+      .set('probgid', probgid)
+      .set('problemsubid',problemsubid);
     return this.http.get(`${url}/sitevisit.php`, { params: params });
   }
   getSwdetail(sw_no: any) {

@@ -22,9 +22,58 @@
     <mat-option value=''>ทั้งหมด</mat-option>
     <mat-option value="0">รอเสนออนุมัติ</mat-option>
     <mat-option value="1">sw ภาคเสนออนุมัติ</mat-option>
-    <mat-option value="2">วิชาการภาคเสนออนุมัติ</mat-option>
-    <mat-option value="3">MTS เสนออนุมัติ</mat-option>
-    <mat-option value="4">วิชาการกลางเสนออนุมัติ</mat-option>
+    <mat-option value="2">MTS เสนออนุมัติ</mat-option>
+    <mat-option value="3">sw สรุปข้อเสนอแนะจาก MTS</mat-option>
+    <mat-option value="4">วิชาการภาคเสนออนุมัติ</mat-option>
+    <mat-option value="5">วิชาการกลางเสนออนุมัติ</mat-option>
+  </mat-select>
+</mat-form-field>
+<mat-form-field
+  class="mobile-full-width mobile"
+  [style.display]="(ismobile|| isDesktop) ? 'inline-block' : 'none'"
+  *ngIf="!(user.level.indexOf('3')>-1)"
+  >
+  <mat-select
+    placeholder="ภาค"
+    [formControl]="region"
+    >
+    <mat-option value=''>ทั้งหมด</mat-option>
+    <mat-option value="1">1</mat-option>
+    <mat-option value="2">2</mat-option>
+    <mat-option value="3">3</mat-option>
+    <mat-option value="4">4</mat-option>
+    <mat-option value="5">5</mat-option>
+    <mat-option value="6">6</mat-option>
+    <mat-option value="7">7</mat-option>
+    <mat-option value="8">8</mat-option>
+    <mat-option value="9">9</mat-option>
+  </mat-select>
+</mat-form-field>
+<mat-form-field
+  class="mobile-full-width mobile"
+  [style.display]="(ismobile|| isDesktop) ? 'inline-block' : 'none'"
+  >
+  <mat-select
+    placeholder="ระบบ"
+    [formControl]="probgid"
+    (selectionChange)="getProblemsub()"
+    >
+    <mat-option value=''>ทั้งหมด</mat-option>
+    <mat-option *ngFor="let p of probgroups" [value]="p.prob_gid" >{{p.prob_gdesc}}</mat-option>
+  </mat-select>
+</mat-form-field>
+<mat-form-field
+  class="mobile-full-width mobile"
+  [style.display]="(ismobile|| isDesktop) ? 'inline-block' : 'none'"
+  *ngIf="probgid.value!=''"
+  >
+  <mat-select
+    placeholder="โปรแกรม"
+    [formControl]="problemsubid"
+
+    >
+    <mat-option value=''>ทั้งหมด</mat-option>
+    <mat-option *ngFor="let p2 of problemsubs" [value]="p2.problem_sub_id">{{p2.problem_sub_desc}}</mat-option>
   </mat-select>
 </mat-form-field>
 <button mat-flat-button color="primary" class="mobile" [style.display]="(ismobile|| isDesktop) ? 'inline-block' : 'none'" (click)="search()">
@@ -33,6 +82,7 @@
 <button mat-flat-button color="accent" class="mobile" [style.display]="(ismobile|| isDesktop) ? 'inline-block' : 'none'" (click)="clear()">
     <mat-icon>clear_all</mat-icon>
 </button>
+
 <mat-paginator [length]="resultsLength" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
 <!-- <mat-table [dataSource]="dataSource" [class.isMobile]="isMobile" > -->
 <mat-table [dataSource]="dataSource"

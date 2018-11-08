@@ -7,9 +7,9 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   { path: '', redirectTo:'main',pathMatch:'full' },
   { path: 'main', component: MainComponent },
-  { path: 'main/:start/:end/:status/:pageIndex/:pageSize', component: MainComponent },
+  { path: 'main/:start/:end/:status/:pageIndex/:pageSize/:region/:probgid/:problemsubid', component: MainComponent },
   { path: 'add', component: AddComponent },
-  { path: 'update/:sw_no/:start/:end/:status/:pageIndex/:pageSize', component: UpdateComponent },
+  { path: 'update/:sw_no/:start/:end/:status/:pageIndex/:pageSize/:region/:probgid/:problemsubid', component: UpdateComponent },
   { path: '**', redirectTo: 'main', pathMatch: 'full' },
 ];
 @NgModule({

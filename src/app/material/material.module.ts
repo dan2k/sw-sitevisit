@@ -16,6 +16,8 @@ import {
   MatTableModule,
   MatCardModule,
   MatTooltipModule,
+  MatDialogModule,
+  MatAutocompleteModule,
 } from '@angular/material';
 
 @NgModule({
@@ -36,6 +38,8 @@ import {
     MatTableModule,
     MatCardModule,
     MatTooltipModule,
+    MatDialogModule,
+    MatAutocompleteModule,
   ],
   exports: [
     CommonModule,
@@ -54,6 +58,8 @@ import {
     MatTableModule,
     MatCardModule,
     MatTooltipModule,
+    MatDialogModule,
+    MatAutocompleteModule,
   ],
   declarations: []
 })

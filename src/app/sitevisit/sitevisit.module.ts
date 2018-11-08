@@ -7,6 +7,7 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { UpdateComponent } from './update/update.component';
 import { MainComponent } from './main/main.component';
+import { DialogComponent } from './dialog/dialog.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -19,7 +20,9 @@ import { MainComponent } from './main/main.component';
   declarations: [
     AddComponent,
     UpdateComponent,
-    MainComponent
-  ]
+    MainComponent,
+    DialogComponent
+  ],
+  entryComponents: [DialogComponent]
 })
 export class SitevisitModule { }
