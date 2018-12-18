@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { UpdateComponent } from './update/update.component';
 import { MainComponent } from './main/main.component';
 import { DialogComponent } from './dialog/dialog.component';
+import { FrmprintComponent } from './frmprint/frmprint.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -21,7 +22,8 @@ import { DialogComponent } from './dialog/dialog.component';
     AddComponent,
     UpdateComponent,
     MainComponent,
-    DialogComponent
+    DialogComponent,
+    FrmprintComponent
   ],
   entryComponents: [DialogComponent]
 })

@@ -206,7 +206,11 @@ export class UpdateComponent implements OnInit {
     window.open(`http://${HOST}/mpsicc/iccServer/sw-sitevisit/${filedoc}`, '_blank');
   }
   print() {
-    window.open(`http://${HOST}/mpsicc/iccServer/sw-sitevisit/rep.php?sw_no=${this.sw_no}`, '_blank');
+    // window.open(`http://${HOST}/mpsicc/iccServer/sw-sitevisit/rep.php?sw_no=${this.sw_no}`, '_blank');
+    this.rout.navigate([
+      "frmprint",
+      this.detail.sw_no
+    ]);
   }
   del(filedoc: any) {
     if (!confirm('ต้องการลบไฟล์หรือไม่')) {

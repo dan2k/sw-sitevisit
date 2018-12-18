@@ -63,6 +63,19 @@ export class SitevisiteService {
       .set('action', 'getApprove');
     return this.http.get(`${url}/sitevisit.php`, { params: params });
   }
+  getText(type: any) {
+    let params = new HttpParams()
+      .set('action', 'getText')
+      .set('type', type);
+    return this.http.get(`${url}/sitevisit.php`, { params: params });
+  }
+  upText(to: any, from: any) {
+    let params = new HttpParams()
+      .set('action', 'upText')
+      .set('to', to)
+      .set('from', from);
+    return this.http.get(`${url}/sitevisit.php`, { params: params });
+  }
   ckSw(swno: any) {
     let params = new HttpParams()
       .set('action', 'ckSw')

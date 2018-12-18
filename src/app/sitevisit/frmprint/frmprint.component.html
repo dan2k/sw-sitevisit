@@ -1,0 +1,36 @@
+<div class="container-fuild">
+  <form class="sw-form"  [formGroup]="myfrm" (ngSubmit)="submit()" #f="ngForm">
+    <!-- <mat-form-field class="sw-full-width">
+      <input matInput placeholder="ถึง" [formControl]="toname" required>
+      <mat-error *ngIf="toname.invalid && (toname.touched||toname.dirty)">กรุณาระบบ</mat-error>
+    </mat-form-field>
+    <mat-form-field class="sw-full-width">
+      <input matInput placeholder="จาก" [formControl]="fromname" required>
+      <mat-error *ngIf="fromname.invalid && (fromname.touched || fromname.dirty)">กรุณาระบุ</mat-error>
+    </mat-form-field> -->
+    <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+    <mat-form-field class="sw-full-width">
+      <input type="text" placeholder="ถึง" aria-label="Number" matInput [formControl]="toname1" [matAutocomplete]="auto1" >
+      <mat-autocomplete #auto1="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions1 | async" [value]="option.text">
+          {{option.text}}
+        </mat-option>
+      </mat-autocomplete>
+      <mat-error *ngIf="toname1.invalid && (toname1.touched || toname1.dirty)">กรุณาระบุ</mat-error>
+    </mat-form-field>
+    <mat-form-field class="sw-full-width">
+      <input type="text" placeholder="จาก" aria-label="Number" matInput [formControl]="fromname1" [matAutocomplete]="auto2" >
+      <mat-autocomplete #auto2="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions2 | async" [value]="option.text">
+          {{option.text}}
+        </mat-option>
+      </mat-autocomplete>
+      <mat-error *ngIf="fromname1.invalid && (fromname1.touched || fromname1.dirty)">กรุณาระบุ</mat-error>
+    </mat-form-field>
+    <div class="button-row">
+      <button type="submit" [disabled]="myfrm.invalid" mat-raised-button color="primary"><mat-icon >print</mat-icon></button>
+      <button type="button" mat-raised-button color="accent" (click)="reset()">ยกเลิก</button>
+      <button type="button" mat-raised-button color="danger" (click)="back()">ปิด</button>
+    </div>
+  </form>
+</div>

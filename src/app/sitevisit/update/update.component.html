@@ -186,7 +186,12 @@
     <button mat-flat-button color="accent"
         (click)="dup()"
         *ngIf="(detail.sw_status==1 && user.upd_permit==1 && user.level.indexOf('3')>-1)"><mat-icon >control_point_duplicate</mat-icon></button>
-    <button mat-flat-button color="primary" (click)="print()"><mat-icon >print</mat-icon></button>
+    <button
+      mat-flat-button
+      color="primary"
+      (click)="print()"
+      *ngIf="detail.sw_center_remark!='' || detail.sw_center_remark!=null"
+      ><mat-icon >print</mat-icon></button>
 
     <button mat-flat-button color="warn" (click)="back()">ปิด</button>
   </mat-card-footer>
