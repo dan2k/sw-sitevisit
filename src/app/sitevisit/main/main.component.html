@@ -18,7 +18,8 @@
   <mat-datepicker touchUi #end disabled="false"></mat-datepicker>
 </mat-form-field>
 
-<mat-form-field class="mobile-full-width mobile" [style.display]="(ismobile|| isDesktop) ? 'inline-block' : 'none'" [hidden]="user.level[0]==3 || user.level[0]==4">
+<mat-form-field class="mobile-full-width mobile" [style.display]="(ismobile|| isDesktop) ? 'inline-block' : 'none'"
+  [hidden]="user.level[0]==3 || user.level[0]==4">
   <mat-select placeholder="สถานะ" [formControl]="status">
     <mat-option value=''>ทั้งหมด</mat-option>
     <mat-option value="0">รอเสนออนุมัติ</mat-option>
@@ -28,7 +29,7 @@
     <mat-option value="4">วิชาการภาคเสนออนุมัติ</mat-option>
     <mat-option value="5">วิชาการกลางเสนออนุมัติ</mat-option>
   </mat-select>
-</mat-form-field> 
+</mat-form-field>
 
 <mat-form-field
   class="mobile-full-width mobile"
