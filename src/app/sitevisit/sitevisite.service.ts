@@ -162,4 +162,10 @@ export class SitevisiteService {
     if (day.length < 2) day = "0" + day;
     return [year, month, day].join("-");
   }
+  getDocno(sw_no: any) {
+    let params = new HttpParams()
+      .set('action', 'getDocno')
+      .set('sw_no', sw_no);
+    return this.http.get(`${url}/sitevisit.php`, { params: params });
+  }
 }

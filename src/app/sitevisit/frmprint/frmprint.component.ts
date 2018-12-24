@@ -18,13 +18,14 @@ export class FrmprintComponent implements OnInit {
   // fromname: any = new FormControl('', [Validators.required]);
   toname1 = new FormControl('', [Validators.required]);
   fromname1 = new FormControl('', [Validators.required]);
+  docno = new FormControl('', [Validators.required]);
+  docno2: any;
   myfrm: FormGroup;
   sw_no: any;
   options1: Option[];
   options2: Option[];
   filteredOptions1: Observable<Option[]>;
   filteredOptions2: Observable<Option[]>;
-
   constructor(
     private router: ActivatedRoute,
     private service:SitevisiteService
@@ -36,7 +37,8 @@ export class FrmprintComponent implements OnInit {
       // toname: this.toname,
       // fromname: this.fromname,
       toname1: this.toname1,
-      fromname1:this.fromname1
+      fromname1: this.fromname1,
+      docno:this.docno
     });
   }
   getText(type: any) {
@@ -61,7 +63,6 @@ export class FrmprintComponent implements OnInit {
       } else {
         console.log(data);
       }
-
     });
   }
   private _filter(name: string,type:any): Option[] {
@@ -78,10 +79,26 @@ export class FrmprintComponent implements OnInit {
   ngOnInit() {
     this.getText(1);
     this.getText(2);
+    this.getDocno();
+
+  }
+  getDocno() {
+    // this.docno.setValue('1/2561');
+    this.service.getDocno(this.sw_no).subscribe((data: any) => {
+      console.log(data);
+      if (data.status) {
+        this.docno.setValue(data.docno);
+        this.docno2 = data.docno;
+        // this.isset = data.isset;
+        if (data.isset) this.myfrm.controls['docno'].disable();
+      }else{
+        console.log(data);
+      }
+    });
   }
   submit() {
     if (this.myfrm.valid) {
-      window.open(`http://${HOST}/mpsicc/iccServer/sw-sitevisit/rep.php?sw_no=${this.sw_no}&toname=${this.toname1.value}&fromname=${this.fromname1.value}`, '_blank');
+      window.open(`http://${HOST}/mpsicc/iccServer/sw-sitevisit/rep.php?sw_no=${this.sw_no}&toname=${this.toname1.value}&fromname=${this.fromname1.value}&docno=${this.docno.value}`, '_blank');
     }
     this.service.upText(this.toname1.value, this.fromname1.value).subscribe((data: any) => {
       if (!data.status) {
@@ -92,10 +109,10 @@ export class FrmprintComponent implements OnInit {
       }
     });
     this.reset();
-
   }
   reset() {
     this.myfrm.reset();
+    this.docno.setValue(this.docno2);
   }
   back() {
     history.back();
